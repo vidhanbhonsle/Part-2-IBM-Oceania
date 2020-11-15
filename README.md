@@ -9,17 +9,19 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 
 ![Arch](/images/AI_Location_Sol_Arch.png)
 
-1. User passes an image in the python code
-1. As we are using the visual recognition service there is a out of the box food model which we are going to use and it detects the name of the food which we have passed
-1. The name of the food is then passed to the Here Maps Discover API which then suggests places around a particular location which we have configured within the python application.
+1. User takes a picture of a food (or downloads it from somewhere) and passes it to our python code.
+2. We then use IBM's visual recognition service and its out of the box food model to detect the name of the food which we have passed on.
+3. We then get the name of the food and will pass it on to the HERE Maps Discover API which then suggests nearby places around a particular location (which we have configured within the python application).
+4. We visualise these places and their information using HERE interactive maps and customised icons.
+
 
 ## Prerequisites
 
-- Code IDE
+- Code IDE (e.g. Microsoft VSCode)
 - Python 3.X (https://www.python.org/downloads/)
-- HERE Developer Account (https://developer.here.com/sign-up?create=Freemium-Basic&keepState=true&step=account)
+- HERE Developer Account (https://bit.ly/here_ibm)
 - IBM Cloud account (https://cloud.ibm.com/login)
-- Bring your Coffee/Tea and enjoy the journey 
+- Have your coffee/tea ready
 
 ## Steps
 
