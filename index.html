@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>HERE IBM Oceania Workshop 1 - Truck delivery app</title>
+        <!-- SCRIPTS -->
+        <meta name="viewport" charset="UTF-8" content="initial-scale=1.0, width=device-width" />
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+        <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"/>
+    </head>
+
+    <body>
+        <div id="mapContainer" style="width: 98vw; height: 91vh; display: block; margin: 0 auto; border: solid 2px black; margin-top: 5px;" > </div>
+        <input type="button" onclick="showDetails()" value = "Show Details" style="width: 200px; height: 30px; border: 2px solid black; display: block; margin: 0 auto; margin-top: 10px;">
+        <div id="panel" style="width: 30vw; background: #39B6B3; color: white; margin-top: 20px;display: block; margin: 0 auto;"></div>
+    </body>
+
+    <script>
+
+          // make sure you replace these values with those you receive from HERE Developer Portal
+          // Sign up and get them from https://her.is/devs
+
+          var here_js_apiKey = "[YOUR_JS_API_KEY]";
+          var here_rest_apiKey = "[YOUR_REST_API_KEY]";
+
+
+          var platform = new H.service.Platform({
+              apikey: here_js_apiKey   
+          });
+
+          // Obtain the default map types from the platform object
+          var defaultLayers = platform.createDefaultLayers();
+
+          var data = "";
+
+          // Get your current position from wego.here.com
+          var destinations = { 
+            "destination1": {lat: -37.778512, lng: 144.974306}, 
+            "destination2": {lat: -37.793962, lng: 144.990440}, 
+            "destination3": {lat: -37.811640, lng: 144.957030}, 
+            "destination4": {lat: -37.775800, lng: 144.933553},
+            "destination5": {lat: -37.709759, lng: 144.974606}, 
+            "destination6": {lat: -37.714317, lng: 144.967514},
+            "destination7": {lat: -37.722485, lng: 144.973918}, 
+            "destination8": {lat: -37.756360, lng: 144.906203}, 
+            "destination9": {lat: -37.818924, lng: 144.888215},
+            "destination10": {lat: -37.818924, lng: 144.889215},  
+            "truck": {lat: -37.808290, lng: 144.980248}
+            };
+          // Instantiate (and display) a map object:
+          var map = new H.Map(
+              document.getElementById('mapContainer'),
+              defaultLayers.vector.normal.map,
+              {
+                  zoom: 12,
+                  center: destinations.truck,
+                  pixelRatio: window.devicePixelRatio || 1
+              });
+
+          window.addEventListener('resize', () => map.getViewPort().resize());
+          var ui = H.ui.UI.createDefault(map, defaultLayers, 'en-US');
+          var mapEvents = new H.mapevents.MapEvents(map);
+          var behavior = new H.mapevents.Behavior(mapEvents);
+          
+          function setStyle(map){
+              // get the vector provider from the base layer
+              var provider = map.getBaseLayer().getProvider();
+              var style = new H.map.Style('https://heremaps.github.io/maps-api-for-javascript-examples/change-style-at-load/data/dark.yaml',
+                'https://js.api.here.com/v3/3.1/styles/omv/');
+              // set the style on the existing layer
+              provider.setStyle(style);
+            }
+          setStyle(map);
+          
+          // Get an instance of the routing service for using the routing API
+          // var router = platform.getRoutingService();
+          var router = platform.getRoutingService(null, 8);
+
+          // Get an instance of the geocoding and search service:
+          var service = platform.getSearchService();
+      
+          // create an icon for the marker. Choose any image you want. I created mine using draw.io     
+          var homeIcon = new H.map.Icon('img/home.png'); 
+          var truckIcon = new H.map.Icon('img/truck.png'); 
+          
+          // Create a marker using the previously instantiated icon
+          var posMarker1 = new H.map.Marker(destinations.destination1,{icon:homeIcon});
+          var posMarker2 = new H.map.Marker(destinations.destination2,{icon:homeIcon});
+          var posMarker3 = new H.map.Marker(destinations.destination3,{icon:homeIcon});
+          var posMarker4 = new H.map.Marker(destinations.destination4,{icon:homeIcon});
+          var posMarker5 = new H.map.Marker(destinations.destination5,{icon:homeIcon});
+          var posMarker6 = new H.map.Marker(destinations.destination6,{icon:homeIcon});
+          var posMarker7 = new H.map.Marker(destinations.destination7,{icon:homeIcon});
+          var posMarker8 = new H.map.Marker(destinations.destination8,{icon:homeIcon});
+          var posMarker9 = new H.map.Marker(destinations.destination9,{icon:homeIcon});
+          var posMarker10 = new H.map.Marker(destinations.destination10,{icon:homeIcon});
+          var posMarkerTruck = new H.map.Marker(destinations.truck,{icon:truckIcon});
+                  
+          // Add the marker to the map 
+          map.addObject(posMarker1);
+          map.addObject(posMarker2);
+          map.addObject(posMarker3);
+          map.addObject(posMarker4);
+          map.addObject(posMarker5);
+          map.addObject(posMarker6);
+          map.addObject(posMarker7);
+          map.addObject(posMarker8);
+          map.addObject(posMarker9);
+          map.addObject(posMarker10);
+          map.addObject(posMarkerTruck);
+
+          function showDetails(){
+
+            let url = 'https://wse.ls.hereapi.com/2/findsequence.json'+
+            '?apiKey=' + here_rest_apiKey + 
+            '&start='+destinations["truck"].lat+','+destinations.truck.lng+
+            '&destination0='+destinations["destination1"].lat+','+destinations["destination1"].lng+
+            '&destination1='+destinations["destination2"].lat+','+destinations["destination2"].lng+
+            '&destination2='+destinations["destination3"].lat+','+destinations["destination3"].lng+
+            '&destination3='+destinations["destination4"].lat+','+destinations["destination4"].lng+
+            '&destination4='+destinations["destination5"].lat+','+destinations["destination5"].lng+
+            '&destination5='+destinations["destination6"].lat+','+destinations["destination6"].lng+
+            '&destination6='+destinations["destination7"].lat+','+destinations["destination7"].lng+
+            '&destination7='+destinations["destination8"].lat+','+destinations["destination8"].lng+
+            '&destination8='+destinations["destination9"].lat+','+destinations["destination9"].lng+
+            '&destination9='+destinations["destination10"].lat+','+destinations["destination10"].lng+
+            '&mode=fastest;car;traffic:disabled'+
+            '&improveFor=time'; 
+
+            async function getapi(url){
+              // Storing response 
+              const response = await fetch(url); 
+              data = await response.json(); 
+            }
+            getapi(url);
+            // var values = data.results[0].interconnections;
+            var values = data.results[0].waypoints;
+            var origin = null;
+
+            for (i in values){
+                a = values[i];
+               
+              var lat = a['lat'];
+              var lng = a['lng'];
+              // console.log(lat+"/"+lng);
+              if (!origin){
+                origin = {lat,lng};
+                continue;
+              } else{
+                var destin = {lat,lng};
+                showRoute(origin,destin);
+                origin = destin;
+                continue; 
+              }
+            }
+            
+        }
+function showRoute(origin,destin){
+          
+        // Create the parameters for the routing request:
+        var routingParameters = {
+          'routingMode': 'fast',
+          'transportMode': 'car',
+          // The start point of the route:
+          'origin': origin.lat + ',' + origin.lng,
+          // The end point of the route:
+          'destination': destin.lat + ',' + destin.lng,
+          // Include the route shape in the response
+          'return': 'polyline'
+        };
+
+        // Define a callback function to process the routing response:
+        var onResult = function(result) {
+          // ensure that at least one route was found
+          if (result.routes.length) {
+            result.routes[0].sections.forEach((section) => {
+                // Create a linestring to use as a point source for the route line
+                let linestring = H.geo.LineString.fromFlexiblePolyline(section.polyline);
+
+                // Create a polyline to display the route:
+                // let routeLine = new H.map.Polyline(linestring, {
+                //   style: { strokeColor: 'red', lineWidth: 3 }
+                // });
+
+                // Create an outline for the route polyline:
+                var routeOutline = new H.map.Polyline(linestring, {
+                  style: {
+                    lineWidth: 10,
+                    strokeColor: 'rgba(255, 0, 0, 0.7)',
+                    lineTailCap: 'arrow-tail',
+                    lineHeadCap: 'arrow-head'
+                  }
+                });
+                // Create a patterned polyline:
+                var routeArrows = new H.map.Polyline(linestring, {
+                  style: {
+                    lineWidth: 10,
+                    fillColor: 'white',
+                    strokeColor: 'rgba(255, 255, 255, 1)',
+                    lineDash: [0, 2],
+                    lineTailCap: 'arrow-tail',
+                    lineHeadCap: 'arrow-head' }
+                  }
+                );
+                // create a group that represents the route line and contains
+                // outline and the pattern
+                var routeLine = new H.map.Group();
+                routeLine.addObjects([routeOutline, routeArrows]);
+
+
+                // Add the route polyline and the two markers to the map:
+                map.addObject(routeLine);
+
+                // Set the map's viewport to make the whole route visible:
+                //map.getViewModel().setLookAtData({bounds: routeLine.getBoundingBox()});
+            
+            });
+          }
+          
+        };
+        router.calculateRoute(routingParameters, onResult, function(error) {
+          Console.log(error.message);
+        });
+      }
+    </script>
+</html>
