@@ -25,10 +25,17 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 
 ## Steps
 
+### Step 0: IDE and project set up
+@vidhan please explain what needs to be done. Do they need to create one project in VS Code or multiple projects for Python code and HTML/JS coee?
+Please explain in a step-by-step manner.
+
 ### Step 1: Python code for Visual Recognition
 
 install Watson Developer Cloud library -
 - pip install --upgrade "ibm-watson>=4.0.1"
+
+
+SA COMMENT: Do people need to create a file anywhere for this?
 
 ```python
 import json
@@ -53,6 +60,8 @@ output_query = classes['images'][0]['classifiers'][0]['classes'][1]['class']
 print(output_query)  
 ```
 The above code will print "Pizza"
+
+SA COMMENT: How do people execute/run this code though?
 
 ### Step 2: Integrating Flask in Python code
 
@@ -152,6 +161,8 @@ Substitute the 'YOUR_IMAGE' with the image you want to use.
 
 Show pizza places around you on a map with a click of a button
 
+SA COMMENT: Where this code should go? 
+
 An instance of Geocoding and Search Service
 
 ```javascript
@@ -206,3 +217,6 @@ function displayRestaurants(response){
             map.addObject(restGroup); 
     }
 ```
+
+
+SA COMMENT: What we conclude? and include a snapshot of the output here plz.
