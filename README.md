@@ -1,3 +1,5 @@
+Is the code up-to-date? There are some code from the first webinar!
+
 # Image Recognition with IBM and HERE Workshop
 
 Ever wondered on how we can add AI when it comes to location based services? In this code we upload pass an image to a Python Flask Application and get recommendation based on the food picture you have passed.
