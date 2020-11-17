@@ -60,6 +60,7 @@ print(output_query)
 ```
 Run the above code using IDE / command prompt / terminal 
 - python image_recognition.py
+
 The above code will print "Pizza"
 
 ### Step 2: Integrating Flask in Python code
