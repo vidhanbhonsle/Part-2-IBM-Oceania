@@ -1,5 +1,3 @@
-Is the code up-to-date? There are some code from the first webinar!
-
 # Image Recognition with IBM and HERE Workshop
 
 Ever wondered on how we can add AI when it comes to location based services? In this code we upload pass an image to a Python Flask Application and get recommendation based on the food picture you have passed.
@@ -28,16 +26,15 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 ## Steps
 
 ### Step 0: IDE and project set up
-@vidhan please explain what needs to be done. Do they need to create one project in VS Code or multiple projects for Python code and HTML/JS coee?
-Please explain in a step-by-step manner.
+- IDE: Any IDE will do (we used VSCode)
+- Project setup: The project consist of Python code for processing the image to get a string. And an HTML file to render a map.
 
 ### Step 1: Python code for Visual Recognition
 
 install Watson Developer Cloud library -
 - pip install --upgrade "ibm-watson>=4.0.1"
 
-
-SA COMMENT: Do people need to create a file anywhere for this?
+For below code, create a file "image_recognition.py" and save it in a folder of your choice.
 
 ```python
 import json
@@ -61,9 +58,9 @@ with open('./test.jpg', 'rb') as image:
 output_query = classes['images'][0]['classifiers'][0]['classes'][1]['class']
 print(output_query)  
 ```
+Run the above code using IDE / command prompt / terminal 
+- python image_recognition.py
 The above code will print "Pizza"
-
-SA COMMENT: How do people execute/run this code though?
 
 ### Step 2: Integrating Flask in Python code
 
@@ -162,9 +159,9 @@ Substitute the 'YOUR_IMAGE' with the image you want to use.
 ### Step 4: Show pizza serving places on Map
 
 Show pizza places around you on a map with a click of a button
-
-SA COMMENT: Where this code should go? 
-
+ 
+In 'map.html' file, inside script tag, add the below code
+ 
 An instance of Geocoding and Search Service
 
 ```javascript
@@ -219,6 +216,3 @@ function displayRestaurants(response){
             map.addObject(restGroup); 
     }
 ```
-
-
-SA COMMENT: What we conclude? and include a snapshot of the output here plz.
