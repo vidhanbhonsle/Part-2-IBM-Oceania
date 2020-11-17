@@ -219,3 +219,4 @@ function displayRestaurants(response){
 ```
 
 ### Output
+![Arch](/img/final_AI.png)
