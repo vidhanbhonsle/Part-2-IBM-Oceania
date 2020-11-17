@@ -161,7 +161,7 @@ Substitute the 'YOUR_IMAGE' with the image you want to use.
 
 Show pizza places around you on a map with a click of a button
  
-In 'map.html' file, inside script tag, add the below code
+In 'map.html' file, inside script tag, add the below provided code lines
  
 An instance of Geocoding and Search Service
 
