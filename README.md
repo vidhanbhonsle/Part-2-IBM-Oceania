@@ -219,4 +219,5 @@ function displayRestaurants(response){
 ```
 
 ### Output
-![Arch](/img/final_AI.png)
+The output shows all the places near you serving pizza.
+![Arch](/img/final_AI.PNG)
