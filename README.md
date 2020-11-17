@@ -26,7 +26,7 @@ Ever wondered on how we can add AI when it comes to location based services? In 
 ## Steps
 
 ### Step 0: IDE and project set up
-- IDE: Any IDE will do (we used VSCode)
+- IDE: You can use IDE of your choice (we used VSCode)
 - Project setup: The project consist of Python code for processing the image to get a string. And an HTML file to render a map.
 
 ### Step 1: Python code for Visual Recognition
