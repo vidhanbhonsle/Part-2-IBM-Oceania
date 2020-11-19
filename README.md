@@ -94,23 +94,22 @@ if __name__ == '__main__':
 Create a folder 'templates' and create a file 'map.html' inside it.
 
 ```html
-<html>   
-<head>   
-<meta name="viewport" charset="UTF-8" content="initial-scale=1.0, width=device-width" />
-<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script> 
-<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script> 
-<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script> 
-<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script> 
-<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"/> 
-</head> 
-
-<body style='margin: 0'> 
-<div id="mapContainer" style="width: 90vw; height: 80vh; display: block; margin: 0 auto; border: solid 2px black; margin-top: 10px;" >
-</div> 
- <div style="width: 100vw; height: 40px; margin-top: 30px;"> 
- <input type="button" onclick="showRestaurants()" value = "Show Restaurants" style="width: 200px; height: 30px; border: 2px solid black; display: block; margin: 0 auto; margin-top: 20px;"> 
- </div>
-</body> 
+<html>  
+<head>
+<meta name="viewport" charset="UTF-8" content="initial-scale=1.0, width=device-width" />
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+<script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"/>
+</head>
+  
+<body style='margin: 0'>
+        <div id="mapContainer" style="width: 90vw; height: 80vh; display: block; margin: 0 auto; border: solid 2px black; margin-top: 10px;" > </div>
+        <div style="width: 100vw; height: 40px; margin-top: 30px;">
+            <input type="button" onclick="showRestaurants()" value = "Show Restaurants" style="width: 200px; height: 30px; border: 2px solid black; display: block; margin: 0 auto; margin-top: 20px;">
+        </div>
+    </body>
 
 <script>    
     const lat = {{latitude}}; 
